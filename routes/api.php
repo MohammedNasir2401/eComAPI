@@ -11,6 +11,12 @@ Route::controller(UserController::class)
     ->prefix('user')->group(function () {
         Route::post('register', 'register');
         Route::post('login','login');
+        Route::post('vendorRegistration','vendorRegistration');
 
+
+
+        Route::group(['middleware' => 'auth:sanctum'], function () {
+            Route::post('tokenLogin','tokenLogin');
+        });
 
     });

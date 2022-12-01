@@ -20,8 +20,8 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function() {
 
-    Route::get('/email/verify', 'VerificationController@show')->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify')->middleware(['signed']);
-    Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
+    // Route::get('/email/verify', 'VerificationController@show')->name('verification.notice');
+    // Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify')->middleware(['signed']);
+    // Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
 
 });

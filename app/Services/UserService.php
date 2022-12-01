@@ -16,7 +16,7 @@ class UserService
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        $user->sendEmailVerificationNotification();
+        // $user->sendEmailVerificationNotification();
         return $user;
 
     }
@@ -32,7 +32,7 @@ class UserService
     public function validatePassword($email,$password)
     {
         $user = User::where('email',$email)->first();
-        if(Hash::check($password,$password)){
+        if(Hash::check($password,$user->password)){
             return true;
         }
         else{

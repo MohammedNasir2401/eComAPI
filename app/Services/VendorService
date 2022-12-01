@@ -1,0 +1,50 @@
+<?php
+
+use App\Models\Vendor;
+use Illuminate\Http\Request;
+
+class VendorService{
+use FileUploadTrait;
+    public function register(Request $request, $userId)
+    {
+        $vendor = new Vendor();
+        $vendor->name = $request->vendor_name;
+        if($request->has('address')){
+            $vendor->address = $request->address;
+        }
+        if($request->has('trade_license')){
+            $vendor->trade_license = $request->trade_license;
+        }
+
+        /*
+     $table->string('logo')->nullable();
+            $table->boolean('is_active')->default(0);
+            $table->boolean('is_verified')->default(0);
+            $table->string('trade_license')->nullable();
+            $table->date('license_expiry_date')->nullable();
+            $table->longText('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('website')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+
+        */
+        if()
+
+
+
+
+        $table->string('name');
+        $table->unsignedBigInteger('user_id');
+        $table->foreign('user_id')->references('id')->on('users');
+        $table->string('logo')->nullable();
+        $table->boolean('is_active')->default(0);
+        $table->boolean('is_verified')->default(0);
+        $table->string('trade_license')->nullable();
+        $table->date('license_expiry_date')->nullable();
+
+    }
+
+
+
+}
