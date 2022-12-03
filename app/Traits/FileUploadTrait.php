@@ -1,8 +1,8 @@
 <?php
 
-trait FileUploadTrait
+class FileUploader
 {
-    public function uploadFile($file, $path = "files")
+    public function upload($file, $path = "files")
     {
         if ($file) {
             $path = $file->store('public/' . $path);

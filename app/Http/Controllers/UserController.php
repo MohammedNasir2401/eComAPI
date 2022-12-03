@@ -8,9 +8,10 @@ use App\Http\Requests\VendorRegistration;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Services\UserService;
+use App\Services\VendorService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
-use VendorService;
+
 
 class UserController extends Controller
 {
@@ -22,12 +23,13 @@ class UserController extends Controller
     }
     public function login(LoginValidation $validatedRequest, UserService $userService)
     {
+
         if($userService->validatePassword($validatedRequest['email'],$validatedRequest['password'])==true){
             $userData= $userService->fetchUserModelWithToken($validatedRequest['email']);
             return $this->onSuccess($userData);
         }
         else{
-            return $this->onError('Invalid credentials');
+            return $this->onError('Invalid credentials');   
         }
 
     }
@@ -39,8 +41,22 @@ class UserController extends Controller
 
     public function vendorRegistration(VendorRegistration $validatedRequest,UserService $userService, VendorService $vendorService)
     {
-         $user=  $userService->register($validatedRequest);
 
+         $user=  $userService->register($validatedRequest);
+         $vendor= $vendorService->register($validatedRequest,$user->id);
+         return $this->onSuccess($vendor);
+
+    }
+    public function vendorLogin(LoginValidation $validatedRequest, UserService $userService)
+    {
+        if($userService->validatePassword($validatedRequest['email'],$validatedRequest['password'])==true){
+            $userData= $userService->fetchUserModelWithToken($validatedRequest['email']);
+            return $this->onSuccess($userData);
+        }
+        else{
+            return $this->onError('Invalid credentials');   
+        }
+        
     }
 
 }

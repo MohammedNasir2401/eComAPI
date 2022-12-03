@@ -32,6 +32,7 @@ class UserService
     public function validatePassword($email,$password)
     {
         $user = User::where('email',$email)->first();
+
         if(Hash::check($password,$user->password)){
             return true;
         }
@@ -42,7 +43,7 @@ class UserService
 
     public function fetchUserModelWithToken($email)
     {
-            $user=User::where('email',$email)->first();
+            $user=User::with('vendor')->where('email',$email)->first();
         $data['user'] =$user ;
         $data['token'] =$user->createToken('MyApp')->plainTextToken;
         return $data;

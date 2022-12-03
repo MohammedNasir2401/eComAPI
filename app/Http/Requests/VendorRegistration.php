@@ -24,7 +24,7 @@ class VendorRegistration extends FormRequest
     public function rules()
     {
         return [
-            'owner_name' => 'required|string',
+            'name' => 'required|string',
             'shop_name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
