@@ -39,10 +39,11 @@ class UserController extends Controller
         return $this->onSuccess($user);
     }
 
-    public function vendorRegistration(VendorRegistration $validatedRequest,UserService $userService, VendorService $vendorService)
+    public function vendorRegistration(VendorRegistration $validatedRequest,UserService $userService, VendorService $vendorService, )
     {
 
          $user=  $userService->register($validatedRequest);
+         
          $vendor= $vendorService->register($validatedRequest,$user->id);
          return $this->onSuccess($vendor);
 

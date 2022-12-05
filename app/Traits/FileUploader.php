@@ -1,6 +1,8 @@
 <?php
 
-class FileUploader
+namespace App\Traits;
+
+trait FileUploader
 {
     public function upload($file, $path = "files")
     {
