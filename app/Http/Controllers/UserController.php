@@ -11,7 +11,7 @@ use App\Services\UserService;
 use App\Services\VendorService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -33,6 +33,15 @@ class UserController extends Controller
         }
 
     }
+
+    public function logout()
+    {
+        Auth::user()->tokens()->delete();
+        return $this->onSuccess('Logged out successfully');
+      
+    }
+
+
     public function tokenLogin(UserService $userService)
     {
         $user= $userService->fetchUserModelWithToken(auth()->user()->email);

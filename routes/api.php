@@ -13,11 +13,12 @@ Route::controller(UserController::class)
         Route::post('login','login');
         Route::post('vendorRegistration','vendorRegistration');
         Route::post('vendorLogin','vendorLogin');
-
-
-
+        
+        
+        
         Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::post('tokenLogin','tokenLogin');
+            Route::post('logout','logout');
         });
 
     });
