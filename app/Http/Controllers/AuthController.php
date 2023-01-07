@@ -1,26 +1,20 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginValidation;
 use App\Http\Requests\RegistrationValidation;
 use App\Http\Requests\VendorRegistration;
 use App\Models\User;
-use App\Models\Vendor;
-use App\Services\UserService;
-use App\Services\VendorService;
 use App\Traits\ResponseTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     use ResponseTrait;
-    public function register(RegistrationValidation $validatedRequest,UserService $userService)
+    public function register(RegistrationValidation $validatedRequest)
     {
        $user = new User();
-        $user = new User();
         $user->name = $validatedRequest->name;
         $user->email = $validatedRequest->email;
         $user->password = Hash::make($validatedRequest->password);
@@ -45,14 +39,20 @@ class UserController extends Controller
         return $this->onSuccess('Logged out successfully');
     }
 
-    public function tokenLogin(UserService $userService)
+    public function tokenLogin()
     {
        $user= Auth::user();
         return $this->onSuccess($user);
     }
 
-    public function vendorRegistration(VendorRegistration $validatedRequest,UserService $userService, VendorService $vendorService, )
+    public function vendorRegistration(VendorRegistration $validatedRequest )
     {
+        $user = new User();
+        $user->name = $validatedRequest->name;
+        $user->email = $validatedRequest->email;
+        $user->password = Hash::make($validatedRequest->password);
+        $user->role = 'vendor';
+        $user->save(); 
 
          $user=  $userService->register($validatedRequest);
          
